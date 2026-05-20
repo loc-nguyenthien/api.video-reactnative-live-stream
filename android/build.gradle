@@ -142,8 +142,3 @@ dependencies {
   implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 }
 
-afterEvaluate {
-  tasks.matching { it.name.contains("bundle") }.configureEach {
-    enabled = false
-  }
-}
