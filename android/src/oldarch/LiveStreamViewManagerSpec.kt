@@ -21,7 +21,7 @@ abstract class LiveStreamViewManagerSpec<T : View> : SimpleViewManager<T>() {
     when (commandId) {
       ViewProps.Commands.START_STREAMING.action -> {
         val requestId = args?.getInt(0) ?: return
-        val streamKey = args.getString(1)
+        val streamKey = args.getString(1) ?: return
         val url = args.getString(2)
         startStreaming(root, requestId, streamKey, url)
       }
