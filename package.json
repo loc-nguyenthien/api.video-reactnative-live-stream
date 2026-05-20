@@ -1,6 +1,6 @@
 {
   "name": "@api.video/react-native-livestream",
-  "version": "2.0.2",
+  "version": "3.0.0",
   "description": "RTMP live streaming library from api.video",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -31,6 +31,7 @@
     "typecheck": "tsc --noEmit",
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
     "prepack": "bob build",
+    "prepare": "bob build",
     "release": "release-it",
     "example": "yarn --cwd example",
     "build:android": "cd example/android && ./gradlew assembleDebug --no-daemon --console=plain -PreactNativeArchitectures=arm64-v8a",

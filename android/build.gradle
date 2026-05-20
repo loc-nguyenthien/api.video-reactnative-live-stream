@@ -70,6 +70,17 @@ android {
     sourceSets {
       main {
         manifest.srcFile "src/main/AndroidManifestNew.xml"
+        // Make sure Gradle knows about the libs/ folder
+        jniLibs.srcDirs = ['src/main/jniLibs']
+        res.srcDirs = ['src/main/res']
+        java.srcDirs = ['src/main/java']
+        manifest.srcFile 'src/main/AndroidManifest.xml'
+        assets.srcDirs = ['src/main/assets']
+
+        // This line is important for AAR/JAR discovery
+        // (if you already have a libs/ declaration, keep that)
+        // NOTE: For libraries, fileTree in dependencies is usually enough,
+        // but specifying here doesn’t hurt.
       }
     }
   }
@@ -120,11 +131,19 @@ dependencies {
   //noinspection GradleDynamicVersion
   implementation "com.facebook.react:react-native:+"
 
-  implementation("video.api:rtmpdroid:1.2.1-packed")
+  // implementation("video.api:rtmpdroid:1.2.1-packed")
   implementation("video.api:android-live-stream:1.4.3") {
     exclude group: 'video.api', module: 'rtmpdroid'
     // exclude the transitive dependency to use packed version to avoid conflict with libssl.so and libcrypto.so
   }
+  // build locally with fork repo: https://github.com/loc-nguyenthien/api.video-rtmpdroid
+  implementation files("libs/lib-packed-release.aar") 
 
   implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+}
+
+afterEvaluate {
+  tasks.matching { it.name.contains("bundle") }.configureEach {
+    enabled = false
+  }
 }
